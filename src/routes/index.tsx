@@ -21,7 +21,13 @@ export default function SurveyPageRoute() {
   return <SurveyPage />;
 }
 
-const RATING_LABELS = ["1 – Poor", "2", "3", "4", "5 – Excellent"];
+const RATING_LABELS = [
+  "1 – Not relevant",
+  "2 – Slightly relevant",
+  "3 – Somewhat relevant",
+  "4 – Relevant",
+  "5 – Highly relevant",
+];
 
 function RatingRow({
   label,
@@ -47,6 +53,7 @@ function RatingRow({
             type="button"
             key={n}
             aria-label={`${label} – ${RATING_LABELS[n - 1]}`}
+            title={RATING_LABELS[n - 1]}
             onClick={() => onChange(n)}
             className={`h-9 w-9 rounded-md border text-sm font-medium transition ${
               value === n
@@ -204,6 +211,23 @@ function SurveyPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
+              {/* Rating scale legend */}
+              <div
+                className="mb-4 rounded-md border border-dashed bg-muted/40 p-3"
+                aria-hidden="true"
+              >
+                <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Rating scale
+                </p>
+                <ul className="grid grid-cols-1 gap-x-4 gap-y-1 text-xs text-muted-foreground sm:grid-cols-2 lg:grid-cols-5">
+                  {RATING_LABELS.map((label) => (
+                    <li key={label} className="flex items-baseline gap-1.5">
+                      <span className="font-semibold text-foreground">{label.split(" – ")[0]}</span>
+                      <span>{label.split(" – ")[1]}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
               {[
                 ["understood_kaizen", "Kaizen mindset"],
                 ["understood_dmaic", "DMAIC (Define · Measure · Analyse · Improve · Control)"],
