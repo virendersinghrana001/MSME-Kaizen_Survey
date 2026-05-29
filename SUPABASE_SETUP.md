@@ -143,3 +143,14 @@ provided, and the new form no longer sends one.)
 Existing rows keep their old values; new submissions will store `NULL` for
 those columns.
 
+## 4. Migration — add `opportunities` column (run once)
+
+A new open-ended "Opportunities" question was added to the form. Add the
+column to capture it:
+
+```sql
+alter table public.kaizen_survey_responses
+  add column if not exists opportunities text;
+```
+
+

@@ -81,6 +81,7 @@ function SurveyPage() {
       understood_pokayoke: undefined as unknown as number,
       confidence_to_apply: undefined as unknown as number,
       key_takeaway: "",
+      opportunities: "",
       top_defect: "",
       root_cause_hypothesis: "",
       plan_30_days: "",
@@ -100,6 +101,7 @@ function SurveyPage() {
       ...data,
       industry: data.industry || null,
       key_takeaway: data.key_takeaway || null,
+      opportunities: data.opportunities || null,
       top_defect: data.top_defect || null,
       root_cause_hypothesis: data.root_cause_hypothesis || null,
       plan_30_days: data.plan_30_days || null,
@@ -248,6 +250,33 @@ function SurveyPage() {
                   placeholder="In your own words…"
                   {...register("key_takeaway")}
                 />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Opportunities */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Opportunities</CardTitle>
+              <CardDescription>
+                What are the opportunities you would want to work on basis your understanding of
+                Kaizen?
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div>
+                <Label htmlFor="opportunities" className="sr-only">
+                  Opportunities to work on
+                </Label>
+                <Textarea
+                  id="opportunities"
+                  rows={5}
+                  placeholder="Describe the specific opportunities, problem areas or improvement themes you would like to take up in your plant…"
+                  {...register("opportunities")}
+                />
+                {errors.opportunities && (
+                  <p className="mt-1 text-xs text-destructive">{errors.opportunities.message}</p>
+                )}
               </div>
             </CardContent>
           </Card>

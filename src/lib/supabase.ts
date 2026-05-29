@@ -38,6 +38,7 @@ export type SurveyResponse = {
   understood_pokayoke: number;
   confidence_to_apply: number;
   key_takeaway: string | null;
+  opportunities: string | null;
   // Action commitments
   top_defect: string | null;
   root_cause_hypothesis: string | null;

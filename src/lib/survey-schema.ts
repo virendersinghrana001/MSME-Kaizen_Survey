@@ -16,6 +16,8 @@ export const surveySchema = z.object({
   confidence_to_apply: rating,
   key_takeaway: z.string().trim().max(1000).optional().or(z.literal("")),
 
+  opportunities: z.string().trim().max(2000).optional().or(z.literal("")),
+
   top_defect: z.string().trim().max(300).optional().or(z.literal("")),
   root_cause_hypothesis: z.string().trim().max(500).optional().or(z.literal("")),
   plan_30_days: z.string().trim().max(800).optional().or(z.literal("")),
