@@ -204,9 +204,9 @@ function Dashboard() {
       <div className="mx-auto max-w-7xl space-y-6 px-4 py-6">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Stat label="Total responses" value={rows.length.toString()} />
-          <Stat label="Avg content rating" value={avg("rating_content")} />
-          <Stat label="Avg facilitator" value={avg("rating_facilitator")} />
-          <Stat label="Avg NPS (0–10)" value={avg("overall_nps")} />
+          <Stat label="Avg Kaizen understanding" value={avg("understood_kaizen")} />
+          <Stat label="Avg 5S understanding" value={avg("understood_5s")} />
+          <Stat label="Avg confidence to apply" value={avg("confidence_to_apply")} />
         </div>
 
         {error && (
@@ -233,9 +233,9 @@ function Dashboard() {
                   <TableHead>Name</TableHead>
                   <TableHead>Company</TableHead>
                   <TableHead>Email</TableHead>
-                  <TableHead className="text-right">Content</TableHead>
-                  <TableHead className="text-right">Facilitator</TableHead>
-                  <TableHead className="text-right">NPS</TableHead>
+                  <TableHead className="text-right">Kaizen</TableHead>
+                  <TableHead className="text-right">5S</TableHead>
+                  <TableHead className="text-right">Confidence</TableHead>
                   <TableHead>Top defect</TableHead>
                 </TableRow>
               </TableHeader>
@@ -248,9 +248,9 @@ function Dashboard() {
                     <TableCell className="font-medium">{r.full_name}</TableCell>
                     <TableCell>{r.company}</TableCell>
                     <TableCell className="text-xs">{r.email}</TableCell>
-                    <TableCell className="text-right">{r.rating_content}</TableCell>
-                    <TableCell className="text-right">{r.rating_facilitator}</TableCell>
-                    <TableCell className="text-right">{r.overall_nps}</TableCell>
+                    <TableCell className="text-right">{r.understood_kaizen}</TableCell>
+                    <TableCell className="text-right">{r.understood_5s}</TableCell>
+                    <TableCell className="text-right">{r.confidence_to_apply}</TableCell>
                     <TableCell className="max-w-[280px] truncate text-xs">
                       {r.top_defect ?? "-"}
                     </TableCell>

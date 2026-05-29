@@ -23,13 +23,13 @@ export type SurveyResponse = {
   role: string | null;
   msme_size: string | null;
   industry: string | null;
-  // Session feedback (1-5)
-  rating_content: number;
-  rating_facilitator: number;
-  rating_pace: number;
-  rating_relevance: number;
-  rating_materials: number;
-  overall_nps: number;
+  // Session feedback (1-5) — removed from form; kept nullable for legacy rows
+  rating_content: number | null;
+  rating_facilitator: number | null;
+  rating_pace: number | null;
+  rating_relevance: number | null;
+  rating_materials: number | null;
+  overall_nps: number | null;
   // Learning outcomes
   understood_kaizen: number;
   understood_dmaic: number;

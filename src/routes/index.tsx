@@ -11,13 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
@@ -80,15 +73,7 @@ function SurveyPage() {
       full_name: "",
       email: "",
       company: "",
-      role: "",
-      msme_size: "",
       industry: "",
-      rating_content: undefined as unknown as number,
-      rating_facilitator: undefined as unknown as number,
-      rating_pace: undefined as unknown as number,
-      rating_relevance: undefined as unknown as number,
-      rating_materials: undefined as unknown as number,
-      overall_nps: undefined as unknown as number,
       understood_kaizen: undefined as unknown as number,
       understood_dmaic: undefined as unknown as number,
       understood_gemba: undefined as unknown as number,
@@ -113,8 +98,6 @@ function SurveyPage() {
     setSubmitting(true);
     const payload = {
       ...data,
-      role: data.role || null,
-      msme_size: data.msme_size || null,
       industry: data.industry || null,
       key_takeaway: data.key_takeaway || null,
       top_defect: data.top_defect || null,
@@ -222,85 +205,8 @@ function SurveyPage() {
                 )}
               </div>
               <div>
-                <Label htmlFor="role">Role / designation</Label>
-                <Input id="role" placeholder="e.g. Plant Head, QA Manager" {...register("role")} />
-              </div>
-              <div>
-                <Label htmlFor="msme_size">MSME size</Label>
-                <Select
-                  value={watch("msme_size") as string}
-                  onValueChange={(v) => setValue("msme_size", v as SurveyInput["msme_size"])}
-                >
-                  <SelectTrigger id="msme_size">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Micro">Micro</SelectItem>
-                    <SelectItem value="Small">Small</SelectItem>
-                    <SelectItem value="Medium">Medium</SelectItem>
-                    <SelectItem value="Large">Large</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
                 <Label htmlFor="industry">Industry</Label>
                 <Input id="industry" placeholder="e.g. Auto components" {...register("industry")} />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Session feedback */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Session feedback</CardTitle>
-              <CardDescription>Rate each on a 1–5 scale.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {[
-                ["rating_content", "Content quality and depth"],
-                ["rating_facilitator", "Facilitator effectiveness"],
-                ["rating_pace", "Pace and time management"],
-                ["rating_relevance", "Relevance to my work"],
-                ["rating_materials", "Materials and case examples"],
-              ].map(([name, label]) => (
-                <RatingRow
-                  key={name}
-                  name={name}
-                  label={label}
-                  value={watch(name as keyof SurveyInput) as number | undefined}
-                  onChange={(v) =>
-                    setValue(name as keyof SurveyInput, v as never, { shouldValidate: true })
-                  }
-                  error={errors[name as keyof SurveyInput]?.message as string | undefined}
-                />
-              ))}
-              <Separator className="my-4" />
-              <div>
-                <Label>Overall, how likely are you to recommend this session? (0–10)</Label>
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {Array.from({ length: 11 }).map((_, n) => {
-                    const cur = watch("overall_nps");
-                    return (
-                      <button
-                        type="button"
-                        key={n}
-                        onClick={() =>
-                          setValue("overall_nps", n as never, { shouldValidate: true })
-                        }
-                        className={`h-9 w-9 rounded-md border text-sm font-medium transition ${
-                          cur === n
-                            ? "border-primary bg-primary text-primary-foreground"
-                            : "border-input bg-background hover:bg-accent"
-                        }`}
-                      >
-                        {n}
-                      </button>
-                    );
-                  })}
-                </div>
-                {errors.overall_nps && (
-                  <p className="mt-1 text-xs text-destructive">Please pick a score.</p>
-                )}
               </div>
             </CardContent>
           </Card>
@@ -310,7 +216,7 @@ function SurveyPage() {
             <CardHeader>
               <CardTitle className="text-lg">Learning outcomes</CardTitle>
               <CardDescription>
-                How well do you understand each concept after the session?
+                Which of these do you feel would be most relevant for your company?
               </CardDescription>
             </CardHeader>
             <CardContent>

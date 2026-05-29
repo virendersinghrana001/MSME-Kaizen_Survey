@@ -115,3 +115,31 @@ values ('PASTE-USER-UUID-HERE', 'admin');
 
 That user can now sign in at `/admin`, see all responses, and export to
 CSV / Excel.
+
+## 3. Migration — form simplification (run once)
+
+The form was simplified in a later revision:
+
+- `Role / designation` and `MSME size` inputs were removed.
+- The entire **Session feedback** section was removed (5 ratings + NPS).
+- The Learning-outcomes description was reworded.
+
+To stop the existing NOT NULL / CHECK constraints from blocking new inserts,
+run this in the Supabase SQL editor:
+
+```sql
+alter table public.kaizen_survey_responses
+  alter column rating_content     drop not null,
+  alter column rating_facilitator drop not null,
+  alter column rating_pace        drop not null,
+  alter column rating_relevance   drop not null,
+  alter column rating_materials   drop not null,
+  alter column overall_nps        drop not null;
+```
+
+(The CHECK constraints are fine to leave — they only fire when a value is
+provided, and the new form no longer sends one.)
+
+Existing rows keep their old values; new submissions will store `NULL` for
+those columns.
+
