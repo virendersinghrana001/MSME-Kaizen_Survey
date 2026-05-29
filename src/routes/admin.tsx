@@ -236,7 +236,7 @@ function Dashboard() {
                   <TableHead className="text-right">Kaizen</TableHead>
                   <TableHead className="text-right">5S</TableHead>
                   <TableHead className="text-right">Confidence</TableHead>
-                  <TableHead>Top defect</TableHead>
+                  <TableHead>Opportunities</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -252,7 +252,7 @@ function Dashboard() {
                     <TableCell className="text-right">{r.understood_5s}</TableCell>
                     <TableCell className="text-right">{r.confidence_to_apply}</TableCell>
                     <TableCell className="max-w-[280px] truncate text-xs">
-                      {r.top_defect ?? "-"}
+                      {r.opportunities ?? "-"}
                     </TableCell>
                   </TableRow>
                 ))}

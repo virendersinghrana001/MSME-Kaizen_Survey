@@ -39,7 +39,7 @@ export type SurveyResponse = {
   confidence_to_apply: number;
   key_takeaway: string | null;
   opportunities: string | null;
-  // Action commitments
+  // Action commitments — removed from form; kept nullable for legacy rows
   top_defect: string | null;
   root_cause_hypothesis: string | null;
   plan_30_days: string | null;

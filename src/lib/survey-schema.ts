@@ -17,16 +17,6 @@ export const surveySchema = z.object({
   key_takeaway: z.string().trim().max(1000).optional().or(z.literal("")),
 
   opportunities: z.string().trim().max(2000).optional().or(z.literal("")),
-
-  top_defect: z.string().trim().max(300).optional().or(z.literal("")),
-  root_cause_hypothesis: z.string().trim().max(500).optional().or(z.literal("")),
-  plan_30_days: z.string().trim().max(800).optional().or(z.literal("")),
-  plan_60_days: z.string().trim().max(800).optional().or(z.literal("")),
-  plan_90_days: z.string().trim().max(800).optional().or(z.literal("")),
-  expected_annual_savings_inr: z
-    .union([z.coerce.number().min(0).max(100000000), z.literal("")])
-    .optional(),
-  additional_comments: z.string().trim().max(1000).optional().or(z.literal("")),
 });
 
 export type SurveyInput = z.infer<typeof surveySchema>;

@@ -82,13 +82,6 @@ function SurveyPage() {
       confidence_to_apply: undefined as unknown as number,
       key_takeaway: "",
       opportunities: "",
-      top_defect: "",
-      root_cause_hypothesis: "",
-      plan_30_days: "",
-      plan_60_days: "",
-      plan_90_days: "",
-      expected_annual_savings_inr: "" as unknown as number,
-      additional_comments: "",
     },
   });
 
@@ -102,17 +95,6 @@ function SurveyPage() {
       industry: data.industry || null,
       key_takeaway: data.key_takeaway || null,
       opportunities: data.opportunities || null,
-      top_defect: data.top_defect || null,
-      root_cause_hypothesis: data.root_cause_hypothesis || null,
-      plan_30_days: data.plan_30_days || null,
-      plan_60_days: data.plan_60_days || null,
-      plan_90_days: data.plan_90_days || null,
-      additional_comments: data.additional_comments || null,
-      expected_annual_savings_inr:
-        data.expected_annual_savings_inr === ("" as unknown as number) ||
-        data.expected_annual_savings_inr === undefined
-          ? null
-          : Number(data.expected_annual_savings_inr),
     };
     const { error } = await supabase.from("kaizen_survey_responses").insert(payload);
     setSubmitting(false);
@@ -277,66 +259,6 @@ function SurveyPage() {
                 {errors.opportunities && (
                   <p className="mt-1 text-xs text-destructive">{errors.opportunities.message}</p>
                 )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Action commitments */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Action commitments</CardTitle>
-              <CardDescription>
-                Turn learning into outcomes - sketch what you'll tackle when you're back at the
-                plant.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <Label htmlFor="top_defect">Top defect / waste you'll attack first</Label>
-                <Input
-                  id="top_defect"
-                  placeholder="e.g. dimensional variation on Op-30 turning"
-                  {...register("top_defect")}
-                />
-              </div>
-              <div>
-                <Label htmlFor="root_cause_hypothesis">Root-cause hypothesis</Label>
-                <Textarea
-                  id="root_cause_hypothesis"
-                  rows={2}
-                  placeholder="e.g. tool-life cycle not tracked; gauge calibration drift"
-                  {...register("root_cause_hypothesis")}
-                />
-              </div>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                <div>
-                  <Label htmlFor="plan_30_days">30-day plan</Label>
-                  <Textarea id="plan_30_days" rows={3} {...register("plan_30_days")} />
-                </div>
-                <div>
-                  <Label htmlFor="plan_60_days">60-day plan</Label>
-                  <Textarea id="plan_60_days" rows={3} {...register("plan_60_days")} />
-                </div>
-                <div>
-                  <Label htmlFor="plan_90_days">90-day plan</Label>
-                  <Textarea id="plan_90_days" rows={3} {...register("plan_90_days")} />
-                </div>
-              </div>
-              <div>
-                <Label htmlFor="expected_annual_savings_inr">
-                  Expected annual savings (INR)
-                </Label>
-                <Input
-                  id="expected_annual_savings_inr"
-                  type="number"
-                  min={0}
-                  placeholder="e.g. 2800000"
-                  {...register("expected_annual_savings_inr")}
-                />
-              </div>
-              <div>
-                <Label htmlFor="additional_comments">Anything else?</Label>
-                <Textarea id="additional_comments" rows={3} {...register("additional_comments")} />
               </div>
             </CardContent>
           </Card>
